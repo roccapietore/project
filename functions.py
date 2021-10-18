@@ -24,3 +24,20 @@ def get_posts():
         results.append(post)
     return results
 
+
+def get_posts_by_post_id(post_id):
+    post = {}
+    for post in import_json(POST_PATH):
+        if post["pk"] == post_id:
+            return post
+
+
+def get_posts_by_username(username):
+    posts = []
+    for post in import_json(POST_PATH):
+        if post["poster_name"] == username:
+            post["comments_count"] = len(get_comments_by_post_id(post['pk']))
+            posts.append(post)
+    return posts
+
+
