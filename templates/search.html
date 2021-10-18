@@ -31,7 +31,7 @@
       <p class="search__results">Найдено постов: {{ search_list|length }}</p>
     </div>
     <section class="items">
-      {% for post in posts %}
+      {% for post in search_list %}
       <div class="items__item item">
         <div class="item__top">
           <a href="/users/{{ post.poster_name }}" class="item__head">
