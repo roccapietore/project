@@ -2,6 +2,7 @@ import json
 
 POST_PATH = 'data/data.json'
 COMMENTS_PATH = 'data/comments.json'
+bookmarks_path = 'data/bookmarks.json'
 
 
 def import_json(path):
@@ -58,6 +59,11 @@ def content_modification(content):
 
     modified_content = " ".join(modified_content)
     return modified_content
+
+
+def add_in_json(add):
+    with open(bookmarks_path, "w", encoding="utf-8") as f:
+        return f.write(json.dumps(add))
 
 
 

@@ -1,6 +1,7 @@
-from functions import get_posts, get_comments_by_post_id, get_posts_by_post_id, get_posts_by_username, create_link, content_modification
+from functions import get_posts, get_comments_by_post_id, get_posts_by_post_id, get_posts_by_username, add_in_json, \
+    content_modification, bookmarks_path, import_json
 
-from flask import Flask, render_template, request, abort
+from flask import Flask, render_template, request, abort, redirect
 
 app = Flask(__name__)
 
@@ -54,6 +55,22 @@ def post_with_tags(tag_name):
         if tag_name in post["content"]:
             tags_posts.append(post)
     return render_template("tag.html", posts=tags_posts, tag_name=tag_name)
+
+
+@app.route('/bookmarks/add/<int:post_id>')
+def bookmarks_add(post_id):
+    posts = get_posts()
+    for post in posts:
+        if post_id == post["pk"]:
+            add_in_json(post)
+            return redirect("/", code=302)
+        elif post_id != post["pk"]:
+            abort(404)
+
+
+@app.route('/bookmarks')
+def get_bookmarks():
+    return render_template("bookmarks.html", bookmarks=import_json(bookmarks_path))
 
 
 if __name__ == '__main__':
