@@ -62,7 +62,7 @@ def bookmarks_add(post_id):
     posts = get_posts()
     for post in posts:
         if post_id == post["pk"]:
-            add_in_json(post)
+            add_in_json(bookmarks_path, post)
             return redirect("/", code=302)
         elif post_id != post["pk"]:
             abort(404)

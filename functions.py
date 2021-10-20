@@ -44,7 +44,7 @@ def get_posts_by_username(username):
 
 def create_link(word):
     part_of_link = f"/tag/{word[1:]}"
-    link = f"<a href={part_of_link}>{word}</a>"
+    link = f"<a href=\"{part_of_link}\">{word}</a>"
     return link
 
 
@@ -61,8 +61,8 @@ def content_modification(content):
     return modified_content
 
 
-def add_in_json(add):
-    with open(bookmarks_path, "w", encoding="utf-8") as f:
+def add_in_json(path, add):
+    with open(path, "w", encoding="utf-8") as f:
         return f.write(json.dumps(add))
 
 
