@@ -41,3 +41,23 @@ def get_posts_by_username(username):
     return posts
 
 
+def create_link(word):
+    part_of_link = f"/tag/{word[1:]}"
+    link = f"<a href={part_of_link}>{word}</a>"
+    return link
+
+
+def content_modification(content):
+    modified_content = []
+    content_words = content.split()
+    for word in content_words:
+        if word[0] == "#":
+            modified_content.append(create_link(word))
+        else:
+            modified_content.append(word)
+
+    modified_content = " ".join(modified_content)
+    return modified_content
+
+
+
